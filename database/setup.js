@@ -2,10 +2,15 @@ const { Sequelize, DataTypes } = require('sequelize');
 require('dotenv').config();
 
 // Initialize database connection
-const db = new Sequelize({
-    dialect: 'sqlite',
-    storage: `database/${process.env.DB_NAME}` || 'tasks.db',
-    logging: false
+const db = new Sequelize(process.env.DATABASE_URL, {
+    dialect: 'postgres',
+    logging: false,
+    dialectOptions: {
+        ssl: process.env.NODE_ENV === 'production' ? {
+            require: true,
+            rejectUnauthorized: false
+        } : false
+    }
 });
 
 // User Model
