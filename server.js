@@ -73,7 +73,7 @@ app.get('/health', (req, res) => {
 app.get('/api/health', (req, res) => {
     res.json({ 
         status: 'OK',
-        message: 'Task API is healthy',
+        message: 'Task API is running healthy',
         environment: process.env.NODE_ENV,
         timestamp: new Date().toISOString()
     });
