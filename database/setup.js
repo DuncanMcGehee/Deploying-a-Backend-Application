@@ -1,6 +1,11 @@
 const { Sequelize, DataTypes } = require('sequelize');
 require('dotenv').config();
 
+// Check for DATABASE_URL
+if (!process.env.DATABASE_URL) {
+    throw new Error('DATABASE_URL environment variable is required. Make sure to connect a PostgreSQL database in Render.');
+}
+
 // Initialize database connection
 const db = new Sequelize(process.env.DATABASE_URL, {
     dialect: 'postgres',
