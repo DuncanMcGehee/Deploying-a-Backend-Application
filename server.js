@@ -69,6 +69,7 @@ app.get('/health', (req, res) => {
     });
 });
 
+// Testing Renders auto-update/redeployment
 app.get('/api/health', (req, res) => {
     res.json({ 
         status: 'OK',
