@@ -69,6 +69,16 @@ app.get('/health', (req, res) => {
     });
 });
 
+// Testing Renders auto-update/redeployment
+app.get('/api/health', (req, res) => {
+    res.json({ 
+        status: 'OK',
+        message: 'Task API is running healthy',
+        environment: process.env.NODE_ENV,
+        timestamp: new Date().toISOString()
+    });
+});
+
 
 // Root endpoint
 app.get('/', (req, res) => {
