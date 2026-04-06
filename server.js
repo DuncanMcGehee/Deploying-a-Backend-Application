@@ -5,7 +5,7 @@ const { db, User, Task } = require('./database/setup');
 require('dotenv').config();
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 // Middleware
 app.use(express.json());
@@ -43,6 +43,10 @@ function requireAuth(req, res, next) {
     }
 }
 
+// Add CORS middleware after your other implemented middleware
+const cors = require('cors');
+app.use(cors());
+
 // Test database connection
 async function testConnection() {
     try {
@@ -60,6 +64,15 @@ app.get('/health', (req, res) => {
     res.json({ 
         status: 'OK', 
         message: 'Task API is running',
+        environment: process.env.NODE_ENV,
+        timestamp: new Date().toISOString()
+    });
+});
+
+app.get('/api/health', (req, res) => {
+    res.json({ 
+        status: 'OK',
+        message: 'Task API is healthy',
         environment: process.env.NODE_ENV,
         timestamp: new Date().toISOString()
     });
